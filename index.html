@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Recibos Costa Warcalde</title>
+
+		<!-- DataTable CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css"
+		/>
+
+		<!-- dataTables checkboxes -->
+		<link
+			type="text/css"
+			href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css"
+			rel="stylesheet"
+		/>
+
+		<!-- Mi CSS -->
+		<link rel="stylesheet" href="public/css/jornales-proveedores.css" />
+
+		<!-- fontawesome -->
+
+		<script
+			src="https://kit.fontawesome.com/4dc73a2bed.js"
+			crossorigin="anonymous"
+		></script>
+	</head>
+	<body>
+		<!-- Modal de edición filas -->
+
+		<dialog class="modal-edit" id="modal_mensuales-edicion">
+			<header class="header_modal-edit">
+				<h5>Edición</h5>
+				<button class="btn_modal-close" aria-label="Close">
+					<i class="fa-solid fa-xmark" style="color: #e7e7e7"></i>
+				</button>
+			</header>
+			<main class="main_modal-edit">
+				<form id="form_mensuales" method="dialog">
+					<div class="input-group">
+						<input
+							type="text"
+							id="nombre"
+							class="required"
+							placeholder=" "
+							name="NOMBRE"
+							required
+						/>
+						<label for="nombre">Nombre y Apellido</label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="dni"
+							class="required"
+							placeholder=" "
+							name="DNI"
+							required
+						/>
+						<label for="dni">DNI</label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="date"
+							id="fecha"
+							class="required"
+							placeholder=" "
+							name="FECHA"
+							value=""
+							required
+						/>
+						<label for="fecha"></label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="haberes_mes"
+							placeholder=" "
+							name="HABERES MES"
+						/>
+						<label for="haberes_mes">Haberes Mes</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="horas_extras"
+							placeholder=" "
+							name="HORAS EXTRAS"
+						/>
+						<label for="horas_extras">Horas Extras</label>
+					</div>
+					<div class="input-group">
+						<input type="number" id="feriado" placeholder=" " name="FERIADO" />
+						<label for="feriado">Feriado</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="vacaciones"
+							placeholder=" "
+							name="VACACIONES"
+						/>
+						<label for="vacaciones">Vacaciones</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="almuerzo"
+							placeholder=" "
+							name="ALMUERZO"
+						/>
+						<label for="almuerzo">Almuerzo</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="adelanto"
+							placeholder=" "
+							name="ADELANTO"
+						/>
+						<label for="adelanto">Adelanto</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="vacaciones_tomadas"
+							placeholder=" "
+							name="VACIONES TOMADAS"
+						/>
+						<label for="vacaciones_tomadas">Vacaciones Tomadas</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="aguinaldo"
+							placeholder=" "
+							name="AGUINALDO"
+						/>
+						<label for="aguinaldo">Aguinaldo</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="string"
+							id="total"
+							placeholder=" "
+							name="TOTAL"
+							disabled
+						/>
+						<label for="total">TOTAL</label>
+					</div>
+				</form>
+			</main>
+			<footer class="footer_modal-edit">
+				<button class="btn_modal-cancelar">Cancelar</button>
+				<button class="btn_modal-guardar btn_mensuales-guardar">Guardar</button>
+			</footer>
+		</dialog>
+
+		<!-- Modal añadir nueva fila -->
+
+		<dialog class="modal-edit modal-add" id="modal_mensuales-añadir">
+			<header class="header_modal-edit">
+				<h5>Añadir</h5>
+				<button class="btn_modal-close" aria-label="Close">
+					<i class="fa-solid fa-xmark" style="color: #e7e7e7"></i>
+				</button>
+			</header>
+			<main class="main_modal-edit">
+				<form id="form_mensuales-add" method="dialog">
+					<div class="input-group">
+						<input
+							type="text"
+							id="nombre"
+							class="required"
+							placeholder=" "
+							name="NOMBRE"
+							required
+						/>
+						<label for="nombre">Nombre y Apellido</label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="dni"
+							class="required"
+							placeholder=" "
+							name="DNI"
+							required
+						/>
+						<label for="dni">DNI</label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="date"
+							id="fecha"
+							class="required"
+							placeholder=" "
+							name="FECHA"
+							value=""
+							required
+						/>
+						<label for="fecha"></label>
+						<span class="emptyError"></span>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="haberes_mes"
+							placeholder=" "
+							name="HABERES MES"
+						/>
+						<label for="haberes_mes">Haberes Mes</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="horas_extras"
+							placeholder=" "
+							name="HORAS EXTRAS"
+						/>
+						<label for="horas_extras">Horas Extras</label>
+					</div>
+					<div class="input-group">
+						<input type="number" id="feriado" placeholder=" " name="FERIADO" />
+						<label for="feriado">Feriado</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="vacaciones"
+							placeholder=" "
+							name="VACACIONES"
+						/>
+						<label for="vacaciones">Vacaciones</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="almuerzo"
+							placeholder=" "
+							name="ALMUERZO"
+						/>
+						<label for="almuerzo">Almuerzo</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="adelanto"
+							placeholder=" "
+							name="ADELANTO"
+						/>
+						<label for="adelanto">Adelanto</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="vacaciones_tomadas"
+							placeholder=" "
+							name="VACIONES TOMADAS"
+						/>
+						<label for="vacaciones_tomadas">Vacaciones Tomadas</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="number"
+							id="aguinaldo"
+							placeholder=" "
+							name="AGUINALDO"
+						/>
+						<label for="aguinaldo">Aguinaldo</label>
+					</div>
+					<div class="input-group">
+						<input
+							type="string"
+							id="total"
+							placeholder=" "
+							name="TOTAL"
+							disabled
+						/>
+						<label for="total">TOTAL</label>
+					</div>
+				</form>
+			</main>
+			<footer class="footer_modal-edit">
+				<button class="btn_modal-cancelar">Cancelar</button>
+				<button class="btn_modal-guardar btn_mensuales-añadir">Guardar</button>
+			</footer>
+		</dialog>
+
+		<!-- Modal eliminar todas las filas -->
+		<dialog class="modal_delete-all">
+			<header>
+				<h5>Eliminar</h5>
+				<button class="btn_modal-delete-close">
+					<i class="fa-solid fa-xmark" style="color: #e7e7e7"></i>
+				</button>
+			</header>
+			<main>
+				<p>
+					¿Estas seguro que quieres eliminar todos los elementos de la tabla?
+				</p>
+			</main>
+			<footer>
+				<button class="btn_modal-delete-cancelar">Cancelar</button>
+				<button class="btn_mensuales-eliminar-todos">Eliminar</button>
+			</footer>
+		</dialog>
+
+		<div class="container">
+			<header>
+				<img src="./imagenes/logo-costa-color.png" alt="logo costa warcalde" />
+				<div>
+					<ul>
+						<li>
+							<a href="public/html/Jornales.html" class="header-a">Jornales</a>
+						</li>
+						<li>
+							<a href="public/html/Proveedores.html" class="header-a"
+								>Proveedores</a
+							>
+						</li>
+					</ul>
+				</div>
+			</header>
+			<main>
+				<section id="alert" class="error-section" hidden>
+					<article>
+						<h3>Uups! tenemos un problema.</h3>
+						<br />
+						<p>
+							La tabla no pudo generarse con éxito debido a que el archivo de
+							excel subido no cumple los requisitos necesarios.
+						</p>
+						<br />
+						<p>
+							Puede
+							<strong
+								><em
+									><a id="retryMensuales" href="#inputExcel"
+										>intentar nuevamente</a
+									></em
+								></strong
+							>
+							subiendo un archivo excel que cumpla con los siguientes
+							requerimientos:
+						</p>
+						<br />
+						<ol>
+							<li>
+								<details>
+									<summary>
+										<span
+											>La tabla de excel debe contener los siguientes
+											<strong> <em> encabezados en mayúsculas:</em></strong>
+										</span>
+									</summary>
+									<div>
+										<img src="./imagenes/encabezados_mensaules.png" alt="" />
+									</div>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>
+										<span
+											>En las columnas de NOMBRE, DNI, FECHA Y TOTAL
+											<strong
+												>nunca pueden encontrarse celdas vacías.</strong
+											></span
+										>
+									</summary>
+									<div>
+										<img src="./imagenes/obligatorios_mensuales.png" alt="" />
+									</div>
+								</details>
+							</li>
+							<li>
+								<details>
+									<summary>
+										<span
+											>El
+											<strong>
+												<em>formato de las columnas</em>
+											</strong>
+											debe corresponderse como se señala a continuación:
+										</span>
+									</summary>
+									<img
+										src="./imagenes/formato_mensuales.png"
+										alt="imagen formato de columnas mensuales"
+									/>
+								</details>
+							</li>
+
+							<li>
+								<details>
+									<summary>
+										<span
+											>El formato de la fecha obligatoriamente debe ser del tipo
+											<strong>
+												<em>mm/dd/yyy</em>
+											</strong>
+											(mes, día y año)
+										</span>
+									</summary>
+									<img
+										src="./imagenes/fecha_jornales.png"
+										alt="imagen con el formato fecha de los mensuales"
+									/>
+								</details>
+							</li>
+
+							<li>
+								<details>
+									<summary>
+										<span>
+											Si el archivo de excel cuenta con muchas hojas,
+											<strong>
+												<em>
+													el programa siempre leera el contenido de la primer
+													hoja.
+												</em> </strong
+											>Por lo cual siempre la tabla que desee leer debera
+											hallarse en la hoja número uno.
+										</span>
+									</summary>
+									<img
+										src="./imagenes/hoja_mensuales.png"
+										alt="imagen con la hoja seleccionada de mensuales"
+									/>
+								</details>
+							</li>
+						</ol>
+					</article>
+				</section>
+
+				<div class="container-controls_print_excel">
+					<button id="btn_mensuales-imprimir">
+						<i class="fa-solid fa-print fa-lg" style="color: #ffffff"></i>
+					</button>
+					<label
+						for="inputExcelMensuales"
+						class="custom-file-upload"
+						id="labelinputExcelMensuales"
+					>
+						<i class="fa-solid fa-file-excel fa-lg" style="color: #ffffff"></i>
+					</label>
+					<input
+						type="file"
+						name="inputExcel"
+						id="inputExcelMensuales"
+						accept=".xls, .xlsx"
+					/>
+					<button id="btn_mensuales-añadir" class="btn-add">
+						<strong
+							><i class="fa-solid fa-plus" style="color: #000"></i
+						></strong>
+					</button>
+					<button id="btn_mensuales-eliminarTodos" class="btn_delete-all">
+						<strong>Borrar Todos</strong>
+					</button>
+				</div>
+
+				<div class="container_tableMensuales">
+					<table id="tablaMensuales">
+						<thead>
+							<th>Nombre</th>
+							<th>DNI</th>
+							<th>Fecha</th>
+							<th>Haberes Mes</th>
+							<th>Horas Extras</th>
+							<th>Feriado</th>
+							<th>Vacaciones</th>
+							<th>Almuerzo</th>
+							<th>Adelanto</th>
+							<th>Vacaciones Tomadas</th>
+							<th>Aguinaldo</th>
+							<th>Total</th>
+							<th>
+								<input
+									type="checkbox"
+									name=""
+									id="mensuales_checkbox-all"
+									class="tables_checkbox-all"
+								/>
+							</th>
+							<th>Acciones</th>
+							<th class="hidde">ID</th>
+						</thead>
+						<tbody></tbody>
+						<tfoot></tfoot>
+					</table>
+				</div>
+
+				<div class="containerPdfs"></div>
+			</main>
+
+			<footer>
+				<img src="./imagenes/logo-costa-color.png" alt="logo costa warcalde" />
+			</footer>
+		</div>
+
+		<!-- Script de jquery -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			crossorigin="anonymous"
+		></script>
+
+		<!-- JavasCript DataTables -->
+
+		<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+		<!-- Script dataTables checkboxes -->
+
+		<script
+			type="text/javascript"
+			src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"
+		></script>
+
+		<!-- Script dataTables select -->
+		<script src="https://cdn.datatables.net/select/1.7.0/js/dataTables.select.min.js"></script>
+
+		<!-- CDN Read Excel File  -->
+		<script src="https://unpkg.com/read-excel-file@5.x/bundle/read-excel-file.min.js"></script>
+
+		<!-- html2pdf -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+		<!-- Mi JavaScript -->
+		<script src="public/js/main.js" type="module"></script>
+		<script src="public/js/events.js" type="module"></script>
+	</body>
+</html>
